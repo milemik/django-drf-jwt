@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "django_drf_jwt",
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,11 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": ("django_drf_jwt.authentication.JWTAuthentication",)}
+
+# JWT DATA
+
+JWT_USER_ID_FIELD = "pk"
+JWT_USER_SECRET_FIELD = "secret"  # MUST BE DEFINED - This must be a
+PAYLOAD_HANDLER = None

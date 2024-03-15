@@ -1,3 +1,2 @@
-from django.db import models
-
-# Create your models here.
+# from django.db import models
+# TODO: Maybe model in DB for user secret key as default
