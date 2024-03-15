@@ -43,5 +43,7 @@ class JwtAuthSerializer(serializers.Serializer):
     @classmethod
     def get_payload_handler(cls, *args, **kwargs) -> dict[str, any]:
         return (
-            api_settings.JWT_PAYLOAD_HANDLER(*args, **kwargs) if api_settings.JWT_PAYLOAD_HANDLER else payload_handler(*args, **kwargs)
+            api_settings.JWT_PAYLOAD_HANDLER(*args, **kwargs)
+            if api_settings.JWT_PAYLOAD_HANDLER
+            else payload_handler(*args, **kwargs)
         )

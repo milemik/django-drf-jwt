@@ -128,8 +128,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": ("django_drf_jwt.authentication.JWTAuthentication",)}
 
 # JWT DATA
-
-JWT_USER_ID_FIELD = "pk"
-JWT_USER_SECRET_FIELD = "secret"  # MUST BE DEFINED - This must be a
-PAYLOAD_HANDLER = None
-JWT_AUTH_HEADER_PREFIX = "JWT"
+JWT_DRF = {
+    # JWT_USER_SECRET_FIELD - MUST BE DEFINED - This must be filed in User object
+    "JWT_USER_SECRET_FIELD": "secret",
+}
