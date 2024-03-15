@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_drf_jwt",
+    "articles",
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,4 @@ REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": ("django_drf_jwt.authenticat
 JWT_USER_ID_FIELD = "pk"
 JWT_USER_SECRET_FIELD = "secret"  # MUST BE DEFINED - This must be a
 PAYLOAD_HANDLER = None
+JWT_AUTH_HEADER_PREFIX = "JWT"

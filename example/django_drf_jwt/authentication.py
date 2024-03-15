@@ -20,7 +20,8 @@ class JWTAuthentication(BasicAuthentication):
         token = token.split(" ")
         if len(token) != 2:
             return None
-
+        if token[0].strip().lower() != settings.JWT_AUTH_HEADER_PREFIX.lower():
+            return None
         return token[1]
 
     @classmethod

@@ -21,8 +21,8 @@ class JWTTests(TestCase):
     def test_jwt_auth_init(self):
         response = self.client.post(self.url, {})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.json().get("password")[0], 'This field is required.')
-        self.assertEqual(response.json().get("username")[0], 'This field is required.')
+        self.assertEqual(response.json().get("password")[0], "This field is required.")
+        self.assertEqual(response.json().get("username")[0], "This field is required.")
 
     def test_jwt_auth_wrong_cred(self):
         response = self.client.post(self.url, {"username": "test", "password": "testing123"})

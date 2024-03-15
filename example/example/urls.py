@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("jwt/", include("django_drf_jwt.urls", namespace="django_drf_jwt")),
+    path("articles/", include("articles.urls", namespace="articles")),
 ]
