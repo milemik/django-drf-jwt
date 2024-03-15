@@ -1,9 +1,12 @@
+import uuid
+
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from django_drf_jwt.serializers import JwtAuthSerializer
+from django_drf_jwt.settings import api_settings
 
 
 class JWTAuthView(GenericAPIView):
@@ -25,3 +28,12 @@ class JWTAuthView(GenericAPIView):
         token = serializer.validated_data["token"]
         created = serializer.validated_data["created"]
         return Response({"token": token, "created": created}, status=status.HTTP_201_CREATED)
+
+
+class JWTRevokeTokenView(GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        new_secret = str(uuid.uuid4())
+        setattr(request.user, api_settings.JWT_USER_SECRET_FIELD, new_secret)
+        return Response({}, status=status.HTTP_201_CREATED)

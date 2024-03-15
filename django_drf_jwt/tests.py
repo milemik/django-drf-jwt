@@ -17,6 +17,7 @@ class JWTTests(TestCase):
         self.client = APIClient()
 
         self.url = reverse("django_drf_jwt:get_token")
+        self.revoke_url = reverse("django_drf_jwt:revoke_token")
 
     def test_jwt_auth_init(self):
         response = self.client.post(self.url, {})
@@ -34,3 +35,14 @@ class JWTTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(len(response.json().get("token").split(".")), 3, "Expect JWT Token created")
         self.assertIn("created", response.json().keys(), "Expect created in response body")
+
+    def test_revoke_token_init(self):
+        response = self.client.post(self.revoke_url, {})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_revoke_token(self):
+        response = self.client.post(self.url, {"username": self.username, "password": self.password})
+        token = response.json().get("token")
+        self.client.credentials(HTTP_AUTHORIZATION="JWT " + token)
+        response = self.client.post(self.revoke_url, {})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

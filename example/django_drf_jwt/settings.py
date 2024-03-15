@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from rest_framework.settings import APISettings
 
@@ -21,3 +22,6 @@ api_settings = APISettings(USER_SETTINGS, DEFAULTS, IMPORT_STRINGS)
 
 if not api_settings.JWT_USER_SECRET_FIELD:
     raise ImproperlyConfigured("JWT_USER_SECRET_FIELD must be set in settings file")
+
+if not getattr(get_user_model(), api_settings.JWT_USER_SECRET_FIELD, None):
+    raise ImproperlyConfigured("User don't have secret field")
