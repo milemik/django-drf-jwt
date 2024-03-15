@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
@@ -10,9 +10,9 @@ from articles.models import Article
 
 class ArticleTest(TestCase):
     def setUp(self):
-        self.username = "test"
+        self.username = "test@test.com"
         self.password = "testpass123"
-        user = User.objects.create(username=self.username)
+        user = get_user_model().objects.create(email=self.username)
         user.set_password(self.password)
         user.save()
         self.article = Article.objects.create(posted_by=user, title="Test", body="Hello there")
@@ -27,7 +27,7 @@ class ArticleTest(TestCase):
 
     def test_article_detail_api(self):
         # Get token
-        response = self.client.post(self.get_token_url, {"username": self.username, "password": self.password})
+        response = self.client.post(self.get_token_url, {"email": self.username, "password": self.password})
         token = response.json().get("token")
         self.client.credentials(HTTP_AUTHORIZATION="JWT " + token)
         response = self.client.get(self.url)
