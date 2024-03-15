@@ -36,11 +36,17 @@ class JWTAuthentication(BasicAuthentication):
         token = self.get_token(request)
         user_id, secret = self.decode_token_from_header(token)
         query = {api_settings.JWT_USER_ID_FIELD: user_id}
-        user = get_user_model().objects.get(**query)
+        try:
+            user = get_user_model().objects.get(**query)
+        except get_user_model().DoesNotExist:
+            raise AuthenticationFailed("Could not validate credentials")
+
+        if not self.user_can_authenticate(user):
+            raise AuthenticationFailed("Could not validate credentials")
 
         # user_secret must be the same!
         if secret != str(getattr(user, api_settings.JWT_USER_SECRET_FIELD, None)):
-            return None
+            raise AuthenticationFailed("Could not validate credentials")
         return user, token
 
     @classmethod
