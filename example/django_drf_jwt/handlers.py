@@ -1,6 +1,7 @@
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
+
+from django_drf_jwt.settings import api_settings
 
 
 def payload_handler(user: User) -> dict[str, any]:
@@ -9,10 +10,10 @@ def payload_handler(user: User) -> dict[str, any]:
     :param user:
     :return:
     """
-    user_id_field = settings.JWT_USER_ID_FIELD
+    user_id_field = api_settings.JWT_USER_ID_FIELD
     if not user_id_field:
         user_id_field = "pk"
-    user_secret_field = settings.JWT_USER_SECRET_FIELD
+    user_secret_field = api_settings.JWT_USER_SECRET_FIELD
     if not user_secret_field:
         raise ImproperlyConfigured("JWT_USER_SECRET_FIELD must be defined in settings")
 

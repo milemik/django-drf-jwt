@@ -35,4 +35,3 @@ class ArticleTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Clean credentials
         self.client.credentials()
-
