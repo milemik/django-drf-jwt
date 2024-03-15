@@ -46,3 +46,6 @@ Package is based on [PyJWT](https://github.com/jpadilla/pyjwt)
 
 ### Issues
 Issues and bugs be free to contact me directly
+
+### NOTE
+I plan to push this package to PyPi when ready! :)
