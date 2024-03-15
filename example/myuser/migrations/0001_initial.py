@@ -26,15 +26,11 @@ class Migration(migrations.Migration):
                 ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="last login"
-                    ),
+                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
                 ),
                 (
                     "email",
-                    models.EmailField(
-                        max_length=255, unique=True, verbose_name="email address"
-                    ),
+                    models.EmailField(max_length=255, unique=True, verbose_name="email address"),
                 ),
                 ("date_of_birth", models.DateField(blank=True, null=True)),
                 ("is_active", models.BooleanField(default=True)),

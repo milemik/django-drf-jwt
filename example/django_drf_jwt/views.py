@@ -36,4 +36,5 @@ class JWTRevokeTokenView(GenericAPIView):
     def post(self, request, *args, **kwargs):
         new_secret = str(uuid.uuid4())
         setattr(request.user, api_settings.JWT_USER_SECRET_FIELD, new_secret)
+        request.user.save(update_fields=[api_settings.JWT_USER_SECRET_FIELD])
         return Response({}, status=status.HTTP_201_CREATED)

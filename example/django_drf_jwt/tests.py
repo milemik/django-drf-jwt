@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
 
 from rest_framework import status
 from rest_framework.test import APIClient
+
+from django_drf_jwt.settings import api_settings
 
 
 class JWTTests(TestCase):
@@ -14,6 +15,7 @@ class JWTTests(TestCase):
         self.user = get_user_model().objects.create(email=self.username)
         self.user.set_password(self.password)
         self.user.save()
+        self.user_secret = getattr(self.user, api_settings.JWT_USER_SECRET_FIELD, None)
         self.client = APIClient()
 
         self.url = reverse("django_drf_jwt:get_token")
@@ -47,4 +49,9 @@ class JWTTests(TestCase):
 
         response = self.client.post(self.revoke_url, {})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.client.credentials()
+        user = get_user_model().objects.get(email=self.username)
+        self.assertNotEquals(self.user_secret, getattr(user, api_settings.JWT_USER_SECRET_FIELD, None))
+
+        self.client.credentials(HTTP_AUTHORIZATION="JWT " + token)
+        response = self.client.post(self.revoke_url, {})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
