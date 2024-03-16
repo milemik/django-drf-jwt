@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9, 3.10, 3.11, 3.12]
+        python-version: [3.10, 3.11, 3.12]
         django-version: [ 3.2, 4.1, 4.2, 5.0 ]
         drf-version: [ 3.13, 3.14 ]
 
