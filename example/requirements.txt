@@ -1,0 +1,4 @@
+django==5.0.3
+djangorestframework==3.14.0
+PyJWT==2.8.0
+django-drf-mjwt==0.0.1b2
