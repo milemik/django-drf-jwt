@@ -26,7 +26,9 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r example/requirements.txt
     - name: Run Tests
       run: |
+        echo "Running tests in example! For now!"
+        cd example
         python manage.py test
