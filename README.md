@@ -9,10 +9,19 @@ Package is based on [PyJWT](https://github.com/jpadilla/pyjwt)
 
 1. Install package
     ```shell
-    pip install django-drf-jwt
+    pip install django-drf-mjwt
     ```
 
-2. Update REST_FRAMEWORK settings:
+2. Add django_drf_jwt to your INSTALLED_APPS:
+   ```python
+   INSTALLED_APPS = [
+    # ...
+    "django_drf_jwt",
+    # ...
+    ]
+   ```
+
+3. Update REST_FRAMEWORK settings:
     ```python
     REST_FRAMEWORK = {
         # ...
@@ -23,7 +32,7 @@ Package is based on [PyJWT](https://github.com/jpadilla/pyjwt)
     }
     ```
 
-3. Add new field in your User model and add this to your settings file
+4. Add new field in your User model and add this to your settings file
     ```python
     JWT_DRF = {
         # JWT_USER_SECRET_FIELD - MUST BE DEFINED - This must be filed in User object
