@@ -19,8 +19,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "rest_framework",
+    "tests",
     "django_drf_jwt",  # Your package
-    "myuser",
 ]
 
 MIDDLEWARE = [
@@ -52,10 +52,10 @@ USE_TZ = True
 
 REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": ("django_drf_jwt.authentication.JWTAuthentication",)}
 
-AUTH_USER_MODEL = "myuser.MyUser"
-
 # JWT DATA
 JWT_DRF = {
     # JWT_USER_SECRET_FIELD - MUST BE DEFINED - This must be filed in User object
-    "JWT_USER_SECRET_FIELD": "secret",
+    "JWT_USER_SECRET_FIELD": "secret",  # for testing purposes we can use last_name as secret field
 }
+
+AUTH_USER_MODEL = "tests.EmailUser"
