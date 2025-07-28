@@ -52,9 +52,11 @@ Package is based on [PyJWT](https://github.com/jpadilla/pyjwt)
     }
     ```
 
+## Developing
+
+To setup environment for local developing install requirements from `requirements.txt` file.
+Make sure that you write tests for your implementation.
+
 
 ### Issues
-Issues and bugs be free to contact me directly
-
-### NOTE
-I plan to push this package to PyPi when ready! :)
+If you have any suggestions or you see some issues and bugs be free to contact me!
